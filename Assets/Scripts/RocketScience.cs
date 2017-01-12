@@ -4,6 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class RocketScience : MonoBehaviour {
 	public GameObject PlayerExplosionAnim;
+	public GameObject levelLogicHolder;
 
 	float rocketMinForce = 15f; //Unable to lift from planets
 	float rocketMaxForce = 35f; //Easily lift from planets
@@ -62,15 +63,17 @@ public class RocketScience : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col){
 		Debug.Log ("collision magnitude: " + col.relativeVelocity.magnitude);
 		if (col.relativeVelocity.magnitude > 4.0f) {
-			playExplosion ();
-
-			Destroy (gameObject);
+			killPlayer ();
+		} else if (col.gameObject.name == "TargetPlanet"){
+			levelLogicHolder.GetComponent<Level1> ().objectiveCompleted ();
 		}
 	}
 
-	void playExplosion(){
+	public void killPlayer(){
 		GameObject explosion = (GameObject)Instantiate (PlayerExplosionAnim);
 		explosion.transform.position = transform.position;
 		explosion.transform.rotation = transform.rotation;
+
+		Destroy (gameObject);
 	}
 }

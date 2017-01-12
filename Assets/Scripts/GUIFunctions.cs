@@ -1,18 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class GUIFunctions : MonoBehaviour {
 	public GameObject player;
 	public Canvas deathScreen;
 	public Canvas playerControls;
+	public Canvas nextLevelScreen;
+
+	private const float deathTimeout = 2.0f;
+	float deathTimeoutCounter = 1.0f;
 
 	void OnGUI()
 	{
 		if (player == null)
 		{
-			hide (playerControls);
-			show (deathScreen);
+			if (deathTimeoutCounter > 0) {
+				deathTimeoutCounter -= Time.deltaTime / deathTimeout;
+			} else {
+				hide (playerControls);
+				show (deathScreen);
+			}
 
 			/*
 			GUI.Box(new Rect(Screen.width/2-150, Screen.height/2-60, 300, 50), "You died");
@@ -27,6 +36,10 @@ public class GUIFunctions : MonoBehaviour {
 		}
 	}
 
+	void FixedUpdate(){
+		if (CrossPlatformInputManager.GetButton("MainMenu")) SceneManager.LoadScene("MainMenu");
+	}
+
 	void hide(Canvas obj){
 		CanvasGroup canvas = obj.GetComponent<CanvasGroup>();
 		canvas.alpha = 0f;
@@ -38,5 +51,4 @@ public class GUIFunctions : MonoBehaviour {
 		canvas.alpha = 1f;
 		canvas.blocksRaycasts = true;
 	}
-
 }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour {
 
 	public void startGame(){
-		SceneManager.LoadScene ("level-1");
+		loadLevel1 ();
 	}
 
 	public void showControls(){
@@ -15,4 +15,21 @@ public class MainMenu : MonoBehaviour {
 	public void showMenu(){
 		SceneManager.LoadScene ("MainMenu");
 	}
+
+	public void loadLevel1(){
+		SceneManager.LoadScene ("level-1");
+	}
+
+	public void loadLevel2(){
+		SceneManager.LoadScene ("level-2");
+	}
+
+	public void loadLevel3(){
+		SceneManager.LoadScene ("level-3");
+	}
+
+	public void loadLevel4(){
+		SceneManager.LoadScene ("level-4");
+	}
+
 }

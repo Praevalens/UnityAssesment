@@ -15,7 +15,7 @@ public class RocketScience : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
@@ -65,7 +65,7 @@ public class RocketScience : MonoBehaviour {
 		if (col.relativeVelocity.magnitude > 4.0f) {
 			killPlayer ();
 		} else if (col.gameObject.name == "TargetPlanet"){
-			levelLogicHolder.GetComponent<Level1> ().objectiveCompleted ();
+			levelLogicHolder.GetComponent<LevelLogic> ().objectiveCompleted ();
 		}
 	}
 

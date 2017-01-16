@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class Level1 : MonoBehaviour {
-	const int rocketFuelMax = 1500;
-	const int startingFuel = 500;
+public class LevelLogic : MonoBehaviour {
+	const int rocketFuelMax = 300;
+	public int startingFuel = 300;
 	const int boostFuelUsage = 2;
 	const int burnFuelUsage = 1;
 
@@ -29,12 +29,18 @@ public class Level1 : MonoBehaviour {
 	private const float deathTimeout = 2.0f;
 	float deathTimeoutCounter = 1.0f;
 
+	private bool inRefuelingArea = false;
+
 	// Use this for initialization
 	void Start () {
 		remainingFuel = startingFuel;
 	}
 	
 	void FixedUpdate () {
+		if (inRefuelingArea && remainingFuel < rocketFuelMax) {
+			remainingFuel += 1;
+		}
+
 		if (CrossPlatformInputManager.GetButton("MainMenu")) SceneManager.LoadScene("MainMenu");
 
 		if (CrossPlatformInputManager.GetButton("FireEngine") || CrossPlatformInputManager.GetButton("BoostEngine")){
@@ -85,6 +91,10 @@ public class Level1 : MonoBehaviour {
 				show (nextLevelScreen);
 			}
 		}
+	}
+
+	public void isInRefuelingArea(bool isInArea){
+		inRefuelingArea = isInArea;
 	}
 
 	public void objectiveCompleted(){

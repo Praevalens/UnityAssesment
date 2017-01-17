@@ -73,7 +73,7 @@ public class LevelLogic : MonoBehaviour {
 			}
 		}
 
-		if (player == null)
+		if (player.GetComponent<RocketScience>().isDead())
 		{
 			if (deathTimeoutCounter > 0) {
 				deathTimeoutCounter -= Time.deltaTime / deathTimeout;

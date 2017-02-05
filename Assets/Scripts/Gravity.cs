@@ -5,6 +5,7 @@ public class Gravity : MonoBehaviour {
 	//float maxGravDistance = 4.0f;
 	//float maxGravity = 35.0f;
 	float G = 6.674f*Mathf.Pow(10f,-11f);
+	float rotationForce = 1f;
 	public float gravityForceModifier;
 
 	GameObject[] gravityObjects;
@@ -12,11 +13,12 @@ public class Gravity : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gravityObjects = GameObject.FindGameObjectsWithTag("gravityObject");
+		gameObject.GetComponent<Rigidbody2D> ().angularVelocity = rotationForce;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		gameObject.GetComponent<Rigidbody2D> ().angularVelocity = rotationForce;
 	}
 
 	void FixedUpdate(){

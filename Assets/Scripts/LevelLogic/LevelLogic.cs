@@ -25,6 +25,7 @@ public class LevelLogic : MonoBehaviour {
 	public Canvas deathScreen;
 	public Canvas playerControls;
 	public Canvas nextLevelScreen;
+	public Canvas levelExplanation;
 
 	private const float deathTimeout = 2.0f;
 	float deathTimeoutCounter = 1.0f;
@@ -79,6 +80,7 @@ public class LevelLogic : MonoBehaviour {
 				deathTimeoutCounter -= Time.deltaTime / deathTimeout;
 			} else {
 				hide (playerControls);
+				hide (levelExplanation);
 				show (deathScreen);
 			}
 		}
